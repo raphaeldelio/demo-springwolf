@@ -1,0 +1,7 @@
+demo/springwolf/DemoSpringwolfApplication.class
+demo/springwolf/model/AnotherPayload$Builder.class
+demo/springwolf/model/ExamplePayload$Builder.class
+demo/springwolf/consumer/ExampleConsumer.class
+demo/springwolf/model/ExamplePayload.class
+demo/springwolf/model/AnotherPayload.class
+demo/springwolf/producer/ExampleProducer.class

@@ -1,0 +1,60 @@
+kafka:
+  bootstrap:
+    servers: localhost:29092
+
+spring:
+  application:
+    name: My Demo
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:29092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    producer:
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    properties:
+      schema:
+        registry:
+          url: http://localhost:8081
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="dev-service" password="dev-service-pass";
+        mechanism: PLAIN
+      security:
+        protocol: PLAINTEXT
+      specific:
+        avro:
+          reader: true
+
+springwolf:
+  docket:
+    base-package: demo.springwolf
+    default-content-type: application/vnd.apache.avro;version=1.9.0
+    info:
+      description: The documentation of my demo application
+      title: ${spring.application.name}
+      version: 1.0.0
+    servers:
+      local-kafka:
+        protocol: kafka
+        url: ${kafka.bootstrap.servers:localhost:29092}
+        bindings:
+          kafka:
+            schema-registry-url: http://localhost:8081
+            schema-registry-vendor: confluent
+            schema-registry-available: true
+
+  plugin:
+    kafka:
+      publishing:
+        enabled: true
+        producer:
+          bootstrap-servers: ${kafka.bootstrap.servers:localhost:29092}
+          key-serializer: org.apache.kafka.common.serialization.StringSerializer
+          value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          properties:
+            schema:
+              registry:
+                url: http://localhost:8081

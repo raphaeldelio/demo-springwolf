@@ -1,0 +1,34 @@
+{
+	"namespace": "demo.springwolf.model",
+	"type": "record",
+	"name": "AnotherPayload",
+	"fields": [
+		{
+			"name": "foo",
+			"type": ["null", "string"],
+			"default": null,
+			"doc": "Some string field"
+		},
+		{
+			"name": "ExamplePayload",
+			"type": {
+				"type": "record",
+				"name": "ExamplePayload",
+				"fields": [
+					{
+						"name": "someString",
+						"type": [
+							"null",
+							"string"
+						],
+						"default": null
+					},
+					{
+						"name": "someLong",
+						"type": "long"
+					}
+				]
+			}
+		}
+	]
+}
