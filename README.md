@@ -27,7 +27,16 @@ This is the configuration to produce messages with the Schema Registry with Spri
 ```
 
 ## Workflow
-1. Define your Avro schema (.avsc files)
+1. Define your Avro schema (.avsc or .avdl files)
 2. Generate Java classes from the schema
-3. Implement Kafka producer and consumers
+3. Implement Kafka producers and consumers
 4. Run the application to access Springwolf UI on http://localhost:8080/springwolf/asyncapi-ui.html
+
+## Key Takeaways
+- We need to at least implement the listener or producer method signatures to generate the documentation.
+- The documentation is hosted on the own application. No extra pipeline is needed to make it available. It can
+   easily be accessed through the DEV environment, for example. 
+- The UI can be used to generate messages to Kafka. But the message examples are not correct.
+- The yaml file cannot be opened through AsyncAPI Studio because it has minor errors that must be adjusted. 
+   I opened a GitHub issue to alert the maintainers.
+- It works with AVDL files.
