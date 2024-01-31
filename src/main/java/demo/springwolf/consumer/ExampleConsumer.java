@@ -10,8 +10,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import demo.springwolf.model.ExamplePayload;
 
-import static org.springframework.kafka.support.mapping.AbstractJavaTypeMapper.DEFAULT_CLASSID_FIELD_NAME;
-
 @Service
 public class ExampleConsumer {
 
@@ -28,18 +26,8 @@ public class ExampleConsumer {
     }
 
     @AsyncListener(operation = @AsyncOperation(
-            channelName = "example-consumer-topic",
-            description = "Optional. Customer uploaded an example payload",
-            headers = @AsyncOperation.Headers(
-                    schemaName = "SpringKafkaDefaultHeaders",
-                    values = {
-                            @AsyncOperation.Headers.Header(
-                                    name = DEFAULT_CLASSID_FIELD_NAME,
-                                    description = "Spring Type Id Header",
-                                    value = "demo.springwolf.model.ExamplePayloadDto"
-                            ),
-                    }
-            )
+            channelName = "example-manual-consumer-topic",
+            description = "Optional. Customer uploaded an example payload"
     ))
     @KafkaAsyncOperationBinding
     public void nonAnnotatedReceiveExamplePayload(ExamplePayload payload) {
